@@ -37,6 +37,7 @@ jobs:
           import re
           from html.parser import HTMLParser
           from pathlib import Path
+          from urllib.parse import urlsplit
 
           class LinkParser(HTMLParser):
               def __init__(self):
@@ -77,12 +78,17 @@ jobs:
           for document in [home, publications]:
               parser = LinkParser()
               parser.feed(document)
-              assert '/LJT-Homepage/assets/css/main.css' in parser.links, sorted(parser.links)
-              assert '/LJT-Homepage/publications/' in parser.links, sorted(parser.links)
+              local_paths = set()
+              for link in parser.links:
+                  parsed = urlsplit(link)
+                  if not parsed.netloc or parsed.netloc == 'spallaselvylt934-sudo.github.io':
+                      local_paths.add(parsed.path)
+              assert '/LJT-Homepage/assets/css/main.css' in local_paths, sorted(local_paths)
+              assert '/LJT-Homepage/publications/' in local_paths, sorted(local_paths)
               for placeholder in ['Your Name', 'Your Sidebar Name', 'Paper Title Number', 'og-image.png']:
                   assert placeholder not in document, f'Template placeholder remains: {placeholder}'
               for route in ['cv', 'portfolio', 'teaching', 'talks', 'year-archive', 'markdown']:
-                  assert f'/LJT-Homepage/{route}/' not in parser.links
+                  assert f'/LJT-Homepage/{route}/' not in local_paths
           assert not list(Path('_site/publications').glob('*/index.html')), 'Unexpected publication detail pages'
           print('Verified all requested profile sections, six publications on both pages, contact links, and project-page asset paths.')
           print('Generated HTML pages:', sorted(str(path) for path in Path('_site').rglob('*.html')))
