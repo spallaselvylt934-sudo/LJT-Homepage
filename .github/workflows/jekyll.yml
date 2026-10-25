@@ -103,3 +103,32 @@ jobs:
           enable_jekyll: false
           user_name: 'github-actions[bot]'
           user_email: '41898282+github-actions[bot]@users.noreply.github.com'
+      - name: Check public Pages readiness
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          python3 - <<'PY'
+          import time
+          from urllib.error import HTTPError, URLError
+          from urllib.request import urlopen
+
+          base = 'https://spallaselvylt934-sudo.github.io/LJT-Homepage'
+          endpoints = [(base + '/', 'Junteng Liu'),
+                       (base + '/publications/', 'SynLogic'),
+                       (base + '/assets/css/main.css', None)]
+          last_status = 'not checked'
+          for attempt in range(12):
+              try:
+                  for url, marker in endpoints:
+                      with urlopen(url, timeout=15) as response:
+                          content = response.read()
+                          assert response.status == 200
+                          if marker:
+                              assert marker in content.decode('utf-8')
+                  print('PUBLIC_SITE_READY: ' + base + '/')
+                  break
+              except (HTTPError, URLError, OSError, AssertionError) as error:
+                  last_status = str(error)
+                  time.sleep(5)
+          else:
+              print('::warning::The validated site is on gh-pages, but the public Pages URL is not ready. Enable Pages with gh-pages as the publishing source. Last response: ' + last_status)
+          PY
