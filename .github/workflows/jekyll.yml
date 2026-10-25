@@ -35,7 +35,18 @@ jobs:
           import html
           import json
           import re
+          from html.parser import HTMLParser
           from pathlib import Path
+
+          class LinkParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = set()
+
+              def handle_starttag(self, tag, attrs):
+                  for key, value in attrs:
+                      if key in ('href', 'src') and value:
+                          self.links.add(value)
 
           home = Path('_site/index.html').read_text()
           publications = Path('_site/publications/index.html').read_text()
@@ -64,14 +75,17 @@ jobs:
 
           assert Path('_site/assets/css/main.css').is_file()
           for document in [home, publications]:
-              assert 'href="/LJT-Homepage/assets/css/main.css"' in document
-              assert 'href="/LJT-Homepage/publications/"' in document
+              parser = LinkParser()
+              parser.feed(document)
+              assert '/LJT-Homepage/assets/css/main.css' in parser.links, sorted(parser.links)
+              assert '/LJT-Homepage/publications/' in parser.links, sorted(parser.links)
               for placeholder in ['Your Name', 'Your Sidebar Name', 'Paper Title Number', 'og-image.png']:
                   assert placeholder not in document, f'Template placeholder remains: {placeholder}'
               for route in ['cv', 'portfolio', 'teaching', 'talks', 'year-archive', 'markdown']:
-                  assert f'href="/LJT-Homepage/{route}/"' not in document
+                  assert f'/LJT-Homepage/{route}/' not in parser.links
           assert not list(Path('_site/publications').glob('*/index.html')), 'Unexpected publication detail pages'
           print('Verified all requested profile sections, six publications on both pages, contact links, and project-page asset paths.')
+          print('Generated HTML pages:', sorted(str(path) for path in Path('_site').rglob('*.html')))
           PY
       - name: Publish static site to gh-pages
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
