@@ -57,7 +57,7 @@ social:
 analytics:
   provider: false
 
-# Reading files. Unused template content is excluded while it is being removed.
+# Do not publish unused template content or tooling.
 include:
   - .htaccess
   - _pages
@@ -124,11 +124,11 @@ kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
-# Only publications are emitted as a collection; About is the home page.
+# Publication records are listed on the Publications and About pages.
+# Do not create additional detail pages for individual publications.
 collections:
   publications:
-    output: true
-    permalink: /publications/:path/
+    output: false
 
 defaults:
   - scope:
@@ -154,14 +154,12 @@ sass:
 permalink: /:categories/:title/
 timezone: Etc/UTC
 plugins:
-  - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
 whitelist:
-  - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
   - jekyll-sitemap

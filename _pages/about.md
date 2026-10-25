@@ -30,37 +30,37 @@ I am a first-year PhD candidate in Computer Science at the Hong Kong University 
 
 The complete publication list is also available on the [Publications page]({{ '/publications/' | relative_url }}).
 
-### [SynLogic: Synthesizing Verifiable Reasoning Data at Scale for Learning Logical Reasoning and Beyond]({{ '/publications/synlogic/' | relative_url }})
+### SynLogic: Synthesizing Verifiable Reasoning Data at Scale for Learning Logical Reasoning and Beyond
 
 **arXiv, 2025 · First author**
 
 **Junteng Liu**, Yuanxiang Fan, Zhuo Jiang, Han Ding, Yongyi Hu, Chi Zhang, Yiqi Shi, Shitong Weng, Aili Chen, Shiqi Chen, Yunan Huang, Mozhi Zhang, Pengyu Zhao, Junjie Yan, Junxian He.
 
-### [On the Perception Bottleneck of VLMs for Chart Understanding]({{ '/publications/perception-bottleneck/' | relative_url }})
+### On the Perception Bottleneck of VLMs for Chart Understanding
 
 **arXiv, 2025 · First author**
 
 **Junteng Liu**, Weihao Zeng, Xiwen Zhang, Yijun Wang, Zifei Shan, Junxian He.
 
-### [On the Universal Truthfulness Hyperplane Inside LLMs]({{ '/publications/universal-truthfulness-hyperplane/' | relative_url }})
+### On the Universal Truthfulness Hyperplane Inside LLMs
 
 **EMNLP 2024 · First author**
 
 **Junteng Liu**, Shiqi Chen, Yu Cheng, Junxian He.
 
-### [In-Context Sharpness as Alerts: An Inner Representation Perspective for Hallucination Mitigation]({{ '/publications/in-context-sharpness/' | relative_url }})
+### In-Context Sharpness as Alerts: An Inner Representation Perspective for Hallucination Mitigation
 
 **ICML 2024 · Co-author**
 
 Shiqi Chen, Miao Xiong, **Junteng Liu**, Zhengxuan Wu, Teng Xiao, Siyang Gao, Junxian He.
 
-### [C-Eval: A Multi-Level Multi-Discipline Chinese Evaluation Suite for Foundation Models]({{ '/publications/c-eval/' | relative_url }})
+### C-Eval: A Multi-Level Multi-Discipline Chinese Evaluation Suite for Foundation Models
 
 **NeurIPS 2023 · Co-author**
 
 Yuzhen Huang, Yuzhuo Bai, Zhihao Zhu, Junlei Zhang, Jinghan Zhang, Tangjun Su, **Junteng Liu**, Chuancheng Lv, Yikai Zhang, Jiayi Lei, Yao Fu, Maosong Sun, Junxian He.
 
-### [Composing Parameter-Efficient Modules with Arithmetic Operations]({{ '/publications/composing-parameter-efficient-modules/' | relative_url }})
+### Composing Parameter-Efficient Modules with Arithmetic Operations
 
 **NeurIPS 2023 · Co-author**
 
